@@ -14,6 +14,15 @@ import org.jasypt.iv.RandomIvGenerator;
  * 
  * Default Algorithm used by spring-boot-jasypt:  PBEWITHHMACSHA512ANDAES_256
  * 
+ * 
+ * jasypt.encryptor.algorithm=PBEWITHHMACSHA512ANDAES_256
+jasypt.encryptor.key-obtention-iterations=1000
+jasypt.encryptor.pool-size=1
+jasypt.encryptor.salt-generator-classname=org.jasypt.salt.RandomSaltGenerator
+jasypt.encryptor.iv-generator-classname=org.jasypt.iv.RandomIvGenerator
+jasypt.encryptor.string-output-type=base64
+
+ * 
  *  */
 public class JasyptEncryptionHelper {
 
@@ -22,7 +31,9 @@ public class JasyptEncryptionHelper {
 		String environmentPw = argv[0];
 		String textToEncrypt = argv[1];
 		encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-		encryptor.setIvGenerator(new RandomIvGenerator());
+		encryptor.setIvGenerator(new org.jasypt.iv.RandomIvGenerator());
+		encryptor.setSaltGenerator(new org.jasypt.salt.RandomSaltGenerator());
+//		encryptor.setStringOutputType("base64");
 		encryptor.setPassword(environmentPw);
 		String myEncryptedText = encryptor.encrypt(textToEncrypt);
 		System.out.println("Encrypted:  " + myEncryptedText);
