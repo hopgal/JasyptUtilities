@@ -5,9 +5,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
   <dependency>
+  <!-- 
+  SpringBoot 2.0 uses jasypt 1.9.2
+  SpringBoot 2.4 uses jasypt 1.9.3
+   -->
   <groupId>org.jasypt</groupId>
   <artifactId>jasypt</artifactId>
-  <version>1.9.2</version>
+  <version>1.9.3</version>
   </dependency>
   </dependencies>
   <build>

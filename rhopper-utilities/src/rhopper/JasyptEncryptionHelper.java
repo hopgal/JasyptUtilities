@@ -3,6 +3,7 @@ package rhopper;
 import java.lang.reflect.Method;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.iv.IvGenerator;
 
 /**
  * http://www.jasypt.org/easy-usage.html
@@ -35,7 +36,7 @@ public class JasyptEncryptionHelper {
 		String textToEncrypt = argv[1];
 		try {
 			//does not exist in 1.9.2
-			Method method = encryptor.getClass().getMethod("setIvGenerator");
+			Method method = encryptor.getClass().getMethod("setIvGenerator", IvGenerator.class);
 			Class clazz = Class.forName("org.jasypt.iv.RandomIvGenerator");
 			method.invoke(encryptor, clazz.getDeclaredConstructors()[0].newInstance());
 			encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
